@@ -34,3 +34,4 @@ export function displayresumeMe(req,res,next){
 export function displaycontactInfo(req,res,next){
     res.render('contactme', {title:"Contact Form info", page : "contactCollection"})
 }
+
