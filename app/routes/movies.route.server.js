@@ -6,6 +6,11 @@ import { DisplayMovieList } from "../controllers/movies.controller.server.js"; /
 
 const router = Router();
 
-router.get('/movies-list', DisplayMovieList);
+router.get('/movie-list', DisplayMovieList);
 
-export default router;
+export default router; 
+
+// Remember - when you export a variable using default, 
+// you do not need curly brackets when importing them in anoher file
+// Otherwise you always need {} - system modules like router are put in {} because
+// no physical file actually exports them to be imported as of now in class studies 

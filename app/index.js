@@ -30,9 +30,15 @@ import path, {dirname} from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-
+//*************************Routes******************************************* */
 // Importing the 'router' object created in the index.route.server.js file
 import indexRouter from './routes/index.route.server.js';
+// Week 4 - Added here
+import router from "./routes/movies.route.server.js"; // since the router object is exported as default
+                                                        // within the movies.route.server.js, you can name the
+                                                        // import object anything not just 'router' which is what its 
+                                                        // name is in the movies.route.server.js file
+ // ***************************************************************************
 
 // Importing the needed modules
 import express  from "express";
@@ -50,7 +56,10 @@ index.use(express.static(path.join(__dirname, '../public')));
 
 
 // telling this file to use routing logic for index.ejs file from router folder which contains the file above
+// wiring up index router 
 index.use('/', indexRouter);
-
+// Week4 - Code added here
+// Wiring up movies router
+index.use('/', router);
 
 export default index;
