@@ -3,12 +3,27 @@
 // Filename : index.js
 // Dated : October 2nd, 2022
 
+// ************** Rememeber to run 'npm install mongoose' (library)
 
-// Importing the needed modules
-import express  from "express";
-// Instantiating the express module to be used later as an object
-const index = express();
+// Week 4 - db setup - modules added here
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import session from "express-session";
 
+// Week4 - db setup - Import MOngoose module
+import mongoose from "mongoose";
+// Week 4 - Configuration module
+import { MongoURI, Secret } from "../config/config.js";
+
+
+// Week 4 - completing db configuration
+mongoose.connect(MongoURI); // connection to mongo db opened using mongoose module
+const db = mongoose.connection // 'db' constant stores the connection opened above within it (instantiating the mongoose connection to listen for events from mongoDB)
+
+
+// Week 4 - We now use the 'db' onject to Listen for connection successes/errors
+db.on('open', () => console.log("connected to MongoDB"));
+db.on('error', () => console.log("Mongo connection error"));
 
 // ES Module fix for __dirname
 import path, {dirname} from 'path';
@@ -18,6 +33,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Importing the 'router' object created in the index.route.server.js file
 import indexRouter from './routes/index.route.server.js';
+
+// Importing the needed modules
+import express  from "express";
+// Instantiating the express module to be used later as an object
+const index = express();
 
 // Setting up the view engine to be using EJS
 index.set('views', path.join(__dirname, '/views') );
