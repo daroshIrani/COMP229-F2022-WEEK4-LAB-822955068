@@ -32,13 +32,13 @@
                             <td><%= movies[count].runtime %></td>
                             
                             <td class="text-center col-1">
-                                <a href="/movie-edit/<%= movies[count]._id %>"        
+                                <a href="/movie/edit/<%= movies[count]._id %>"        
                                     class="btn btn-primary btn-sm">
                                     <i class="fas fa-pencil-alt"></i> Edit</a>          <!-- these buttons are not added until the row is populated-->
                             </td>
                             
                             <td class="text-center col-1">
-                                <a href="/movie-delete/<%= movies[count]._id %>"
+                                <a href="/movie/delete/<%= movies[count]._id %>"
                                     class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash-alt"></i> Delete</a>         <!-- these buttons are not added until the row is populated-->
                             </td>

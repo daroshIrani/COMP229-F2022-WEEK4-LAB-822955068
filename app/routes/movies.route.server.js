@@ -2,11 +2,13 @@
 
 import {Router} from "express"; // Import the router modeule from express middleware
 
-import { DisplayMovieList } from "../controllers/movies.controller.server.js"; // importing the movie list function from respective file
+import { DisplayMoviesList, DisplayMoviesAddPage, ProcessMoviesAddPage} from "../controllers/movies.controller.server.js"; // importing the movie list function from respective file
 
 const router = Router();
 
-router.get('/movie-list', DisplayMovieList);
+router.get('/movie-list', DisplayMoviesList);
+router.get('/movie-add', DisplayMoviesAddPage);
+router.post('/movie-list', ProcessMoviesAddPage);
 
 export default router; 
 
