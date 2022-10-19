@@ -8,7 +8,7 @@ const router = Router();
 
 router.get('/movie-list', DisplayMoviesList);
 router.get('/movie-add', DisplayMoviesAddPage);
-router.post('/movie-list', ProcessMoviesAddPage);
+router.post('/movie-add', ProcessMoviesAddPage);
 
 export default router; 
 

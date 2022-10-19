@@ -34,7 +34,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Importing the 'router' object created in the index.route.server.js file
 import indexRouter from './routes/index.route.server.js';
 // Week 4 - Added here
-import router from "./routes/movies.route.server.js"; // since the router object is exported as default
+import movieRouter from './routes/movies.route.server.js'; // since the router object is exported as default
                                                         // within the movies.route.server.js, you can name the
                                                         // import object anything not just 'router' which is what its 
                                                         // name is in the movies.route.server.js file
@@ -60,6 +60,18 @@ index.use(express.static(path.join(__dirname, '../public')));
 index.use('/', indexRouter);
 // Week4 - Code added here
 // Wiring up movies router
-index.use('/', router);
+index.use('/', movieRouter);
+
+index.use(logger('dev'));
+index.use(express.json());
+index.use(express.urlencoded({ extended: false}));
+index.use(cookieParser());
+// **********************************************************
+index.use(session({           
+    secret: Secret,
+    saveUninitialized: false, 
+    resave: false
+}));
+
 
 export default index;
