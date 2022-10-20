@@ -2,13 +2,22 @@
 
 import {Router} from "express"; // Import the router modeule from express middleware
 
-import { DisplayMoviesList, DisplayMoviesAddPage, ProcessMoviesAddPage} from "../controllers/movies.controller.server.js"; // importing the movie list function from respective file
+import { DisplayMoviesList, 
+    DisplayMoviesAddPage, 
+    ProcessMoviesAddPage, 
+    DisplayMoviesEditPage, 
+    ProcessMoviesEditPage, 
+    ProcessMoviesDelete} from "../controllers/movies.controller.server.js"; // importing the movie list function from respective file
 
 const router = Router();
 
 router.get('/movie-list', DisplayMoviesList);
 router.get('/movie-add', DisplayMoviesAddPage);
 router.post('/movie-add', ProcessMoviesAddPage);
+router.post('/movie-edit/:id', ProcessMoviesEditPage);
+router.get('/movie-edit/:id', DisplayMoviesEditPage); /// Remember, when you lok at the routes, 'get' means when this url '/movie-edit/:id ( id which is provided from the DisplayMoviesEditPage on movies.controller.. ) is called, specific function is run 
+                                                      // id in this case is provided by what is collected by the controller 
+router.get('/movie-delete/:id', ProcessMoviesDelete)
 
 export default router; 
 

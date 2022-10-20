@@ -39,7 +39,7 @@ export function ProcessMoviesAddPage(req,res, next){    // function to add a  ne
 
      });
      
-     movieModel.create(newMovie, (err, Movie) =>{   // oriinal function ProcessMoviesAddPage will be processing info on add page as the above codei srun to create the object, function movieModel.create is used to check for error and if not, create the model to be exported to db and redirect the page
+     movieModel.create(newMovie,(err, Movie) =>{   //  movieModel.create(newMovie, (err, Movie) -- oriinal function ProcessMoviesAddPage will be processing info on add page as the above codei srun to create the object, function movieModel.create is used to check for error and if not, create the model to be exported to db and redirect the page
         if(err){
             console.error(err);
             res.end(err);
@@ -51,6 +51,54 @@ export function ProcessMoviesAddPage(req,res, next){    // function to add a  ne
 
 }
 
+
+export function DisplayMoviesEditPage (req,res, next){
+    let id = req.params.id;                             // retreival of request and parameters on every request
+    movieModel.findById(id, (err,movie) =>{             // This is how you do error checking, 
+        if(err){                                        // if error,
+        res.end(err)                                    // response ends with err
+        };
+        
+        res.render('index', {title: 'Edit Movie', page : 'movies/edit', movie:movie});
+    })
+
+}
+
+export function ProcessMoviesEditPage(req, res, next){
+
+     let id = req.params.id;
+    
+    let newMovie = movieModel({
+        _id: req.body.id,
+        name: req.body.name,
+        year: req.body.year,
+        director: req.body.director,
+        genre: req.body.genre,
+        runtime: req.body.runtime
+    });
+
+    movieModel.updateOne({_id: id }, newMovie, (err, Movie) => {
+        if(err){
+            console.error(err);
+            res.end(err);
+        };
+
+        res.redirect('/movie-list')
+    } )
+}
+
+export function ProcessMoviesDelete(req,res, next){
+    let id = req.params.id;
+
+    movieModel.remove({_id:id}, (err)=> {
+        if (err){
+            console.error(err);
+            res.end(err)
+        }
+
+        res.redirect('/movie-list');
+    })
+}
 
 
 // If you need to manipulate the movie list before page is rendered - this is where you do it - The controller renders the page, and the ocnnection here as well
